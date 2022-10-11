@@ -1,6 +1,6 @@
 {
   "name": "@Omnicorp-Inc/react-transcript-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
@@ -35,8 +35,8 @@
     "typescript": "^4.8.4"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "scripts": {
     "build": "yarn build:esm && yarn build:cjs",
