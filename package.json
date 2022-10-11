@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/recallai/react-transcript-components"
+    "url": "https://github.com/Omnicorp-Inc/react-transcript-components"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
