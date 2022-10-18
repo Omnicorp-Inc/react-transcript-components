@@ -4,10 +4,12 @@ import _ from "lodash";
 import styled from "styled-components";
 
 import { Paragraph, Sentence, Speaker, Word } from "../types";
-import { SpeakerColors } from "./utils";
 import SentenceBlock from "./SentenceBlock";
 
-const ParagraphWrapper = styled.div``;
+const ParagraphWrapper = styled.div`
+border-left: 0.5px solid white;
+margin-bottom: 20px;
+`;
 
 const NameTimeWrapper = styled.div<{ nameSet: boolean }>`
   display: flex;
@@ -17,10 +19,9 @@ const NameTimeWrapper = styled.div<{ nameSet: boolean }>`
 `;
 
 const TimestampDiv = styled.div`
-  font-family: Roboto Mono;
   font-size: 12px;
   text-align: right;
-  color: #c2c5ce;
+  color: #b4bed2;
 
   pointer-events: none;
   user-select: none;
@@ -31,7 +32,6 @@ const TimestampDiv = styled.div`
 `;
 
 const Name = styled.div`
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -67,7 +67,6 @@ const _ParagraphBlock = (props: ParagraphProps) => {
     setTimestamp,
     setSkipAutomaticScroll,
     speaker,
-    speakerIdx,
     paragraph,
   } = props;
   const onSentenceClick = useCallback((word: Word) => {
@@ -112,7 +111,7 @@ const _ParagraphBlock = (props: ParagraphProps) => {
         {/* Hide placeholder speaker names */}
         {speaker.name !== "Placeholder" ? (
           <Name
-            style={{ color: SpeakerColors[speakerIdx % SpeakerColors.length] }}
+            style={{ color: '#ffffff' }}
           >
             {speaker.name}
           </Name>

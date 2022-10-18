@@ -46,7 +46,6 @@ const Rectangle = styled.div`
   display: flex;
   align-items: center;
 
-  font-family: Inter;
   font-size: 12px;
   color: #fff;
 `;
@@ -60,7 +59,6 @@ const Button = styled.span`
   margin-left: 3px;
   cursor: pointer;
 
-  font-family: Inter;
   font-size: 12px;
   line-height: 212.5%;
   color: #232839;
@@ -75,7 +73,6 @@ const HighlightText = styled.span`
 `;
 
 const TimeText = styled.span`
-  font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;

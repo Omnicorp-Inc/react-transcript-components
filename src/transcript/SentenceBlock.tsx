@@ -15,13 +15,13 @@ const SentenceWrapper = styled.div`
   position: relative;
 `;
 
-const SentenceBullet = styled.span`
-  user-select: none;
-  width: 5px;
-  &::selection {
-    background-color: transparent;
-  }
-`;
+// const SentenceBullet = styled.span`
+//   user-select: none;
+//   width: 5px;
+//   &::selection {
+//     background-color: transparent;
+//   }
+// `;
 
 const SentenceContent = styled.span`
   z-index: 2;
@@ -29,8 +29,9 @@ const SentenceContent = styled.span`
   position: relative;
   line-height: 29px;
   word-spacing: 0.05em;
-  padding-left: 15px;
+  padding-left: 0px;
   left: -5px;
+  color: #b4bed2;
   &::selection {
     background-color: transparent;
   }
@@ -62,7 +63,7 @@ class SentenceBlock extends React.PureComponent<SentenceProps, {}> {
       .join(" ");
     return (
       <SentenceWrapper key={this.props.sentence.id}>
-        <SentenceBullet>•&nbsp;&nbsp;</SentenceBullet>
+        {/* <SentenceBullet>•&nbsp;&nbsp;</SentenceBullet> */}
         <SentenceContent
           onClick={(e) => {
             const elements = document.elementsFromPoint(e.clientX, e.clientY);

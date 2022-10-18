@@ -37,21 +37,21 @@ https://stackoverflow.com/questions/29986977/firefox-ignores-padding-when-using-
   height: 100%;
   position: relative;
   overflow-y: scroll;
-  background: #ffffff;
+  background: transparent;
   /* padding-bottom: 70px; */
 
   scrollbar-width: thin;
-  scrollbar-color: #e2e2e2 #ffffff;
+  scrollbar-color: ##4d5b75 #4d5b75;
 
   &::-webkit-scrollbar {
     width: 7px !important;
   }
   &::-webkit-scrollbar-thumb {
     visibility: hidden;
-    background: #e2e2e2;
+    background: ##4d5b75;
   }
   &::-webkit-scrollbar-thumb:hover {
-    background: #cdcdcd !important;
+    background: ##4d5b75 !important;
   }
   &:hover {
     &::-webkit-scrollbar-thumb {
@@ -61,7 +61,6 @@ https://stackoverflow.com/questions/29986977/firefox-ignores-padding-when-using-
 `;
 
 const TranscriptTextDiv = styled.div`
-  font-family: Inter;
   font-size: 14px;
   line-height: 180%;
   color: #000000;

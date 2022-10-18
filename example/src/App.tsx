@@ -31,7 +31,7 @@ function App() {
         setTimestamp={setTimestamp}
         highlights={highlights}
         readOnly={false}
-        transcriptPanelHeight={"800px"}
+        transcriptPanelHeight={"400px"}
         createHighlight={(start_word_offset, end_word_offset) => { 
           setHighlights([
             ...highlights, 

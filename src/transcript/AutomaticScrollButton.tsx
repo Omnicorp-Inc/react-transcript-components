@@ -12,7 +12,7 @@ const IndicatorButton = styled.div<{ showOnTop: boolean }>`
     if (props.showOnTop) return "margin-top: 30px;";
     return "bottom: 8px;";
   }}
-  background-color: #2a59ff;
+  background-color: #368ffa;
   border-radius: 6px;
   max-width: 20em;
   height: 2.3rem;
@@ -23,7 +23,6 @@ const IndicatorButton = styled.div<{ showOnTop: boolean }>`
   align-items: center;
   justify-content: center;
   z-index: 9;
-  font-family: Inter;
 
   &::before {
     content: "${(props) => (props.showOnTop ? "\\2191" : "\\2193")}";

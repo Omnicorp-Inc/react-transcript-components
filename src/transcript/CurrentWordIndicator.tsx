@@ -33,7 +33,6 @@ function CurrentWordIndicator(props: Props) {
           borderRadius: 5,
           pointerEvents: "none",
           transition: "0.08s",
-          backdropFilter: "invert(200%)",
         }}
       />
       <div
@@ -43,7 +42,7 @@ function CurrentWordIndicator(props: Props) {
           zIndex: 2,
           // Note: the backgroundColor is the INVERSE of the actual color displayed on screen
           //       because the upper div has backdropFilter invert applied
-          backgroundColor: "#d5a600",
+          border: '1px solid #368ffa',
           borderRadius: 5,
           pointerEvents: "none",
           transition: "0.08s",
