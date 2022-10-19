@@ -13,6 +13,7 @@ const SentenceWrapper = styled.div`
   display: flex;
   /* relative so that mark and comment indicators can use absolute*/
   position: relative;
+  margin-bottom: 15px;
 `;
 
 // const SentenceBullet = styled.span`
@@ -27,10 +28,9 @@ const SentenceContent = styled.span`
   z-index: 2;
   pointer-events: auto;
   position: relative;
-  line-height: 29px;
+  line-height: 19px;
   word-spacing: 0.05em;
   padding-left: 0px;
-  left: -5px;
   color: #b4bed2;
   &::selection {
     background-color: transparent;
