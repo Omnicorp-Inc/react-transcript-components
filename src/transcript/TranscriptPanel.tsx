@@ -18,7 +18,7 @@ import {
 import AutomaticScrollButton from "./AutomaticScrollButton";
 import CurrentWordIndicator from "./CurrentWordIndicator";
 import TranscriptText from "./ParagraphBlock";
-import TranscriptSelection from "./selections/TranscriptSelection";
+// import TranscriptSelection from "./selections/TranscriptSelection";
 import {
   calculateActiveWordAndOffset,
   getTimestampForWord,
@@ -96,15 +96,11 @@ type Props = {
 
 function TranscriptPanel(props: Props) {
   const {
-    readOnly,
     transcriptPanelHeight,
     transcript,
     videoPlaying,
     timestamp,
     setTimestamp,
-    highlights,
-    createHighlight,
-    updateHighlight,
   } = props;
   const panel = useRef<HTMLDivElement>(null);
 
@@ -112,9 +108,9 @@ function TranscriptPanel(props: Props) {
     useState<boolean>(false);
   const [forceAutomaticScroll, setForceAutomaticScroll] =
     useState<boolean>(false);
-  const [selectedHighlightId, setSelectedHighlightId] = useState<
-    string | undefined
-  >();
+  // const [selectedHighlightId, setSelectedHighlightId] = useState<
+  //   string | undefined
+  // >();
 
   const [sentenceIdToNode, setSentenceIdToNode] = useState<
     Map<number, HTMLSpanElement>
@@ -221,18 +217,18 @@ function TranscriptPanel(props: Props) {
     return output;
   }, [transcript]);
 
-  const internalHighlights = useMemo(
-    () =>
-      highlights.map((v) => {
-        // The internal word IDs we generate are actually the word offsets
-        return {
-          id: v.id,
-          startWordId: v.start_word_offset,
-          endWordId: v.end_word_offset,
-        };
-      }),
-    [highlights]
-  );
+  // const internalHighlights = useMemo(
+  //   () =>
+  //     highlights.map((v) => {
+  //       // The internal word IDs we generate are actually the word offsets
+  //       return {
+  //         id: v.id,
+  //         startWordId: v.start_word_offset,
+  //         endWordId: v.end_word_offset,
+  //       };
+  //     }),
+  //   [highlights]
+  // );
 
   const currentWordPosition = useMemo(() => {
     const activeWordData = calculateActiveWordAndOffset(
@@ -357,11 +353,11 @@ function TranscriptPanel(props: Props) {
       )}
       <TranscriptPanelDiv
         ref={panel}
-        onMouseOver={() => {
-          setSelectedHighlightId(undefined);
-        }}
+        // onMouseOver={() => {
+        //   setSelectedHighlightId(undefined);
+        // }}
       >
-        <TranscriptSelection
+        {/* <TranscriptSelection
           panelRef={panel}
           readOnly={readOnly}
           transcript={internalTranscript}
@@ -372,7 +368,7 @@ function TranscriptPanel(props: Props) {
           setSelectedHighlightId={setSelectedHighlightId}
           createHighlight={createHighlight}
           editHighlightBounds={updateHighlight}
-        />
+        /> */}
         {currentWordPosition && (
           <CurrentWordIndicator
             currentWordPosition={currentWordPosition}
