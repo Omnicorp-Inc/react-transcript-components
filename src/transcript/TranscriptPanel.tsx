@@ -92,6 +92,8 @@ type Props = {
     start_word_offset: number,
     end_word_offset: number
   ): void;
+
+  autoScrollButtonRef: { current: HTMLDivElement | null };
 };
 
 function TranscriptPanel(props: Props) {
@@ -101,6 +103,7 @@ function TranscriptPanel(props: Props) {
     videoPlaying,
     timestamp,
     setTimestamp,
+    autoScrollButtonRef,
   } = props;
   const panel = useRef<HTMLDivElement>(null);
 
@@ -349,6 +352,7 @@ function TranscriptPanel(props: Props) {
           setSkipAutomaticScroll={setSkipAutomaticScroll}
           forceAutomaticScroll={forceAutomaticScroll}
           setForceAutomaticScroll={setForceAutomaticScroll}
+          autoScrollButtonRef={autoScrollButtonRef}
         />
       )}
       <TranscriptPanelDiv

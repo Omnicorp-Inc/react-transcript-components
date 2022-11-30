@@ -45,6 +45,8 @@ type Props = {
   setSkipAutomaticScroll(skip: boolean): void;
   forceAutomaticScroll: boolean;
   setForceAutomaticScroll(force: boolean): void;
+
+  autoScrollButtonRef: { current: HTMLDivElement | null };
 };
 
 function AutomaticScrollButton(props: Props) {
@@ -57,6 +59,7 @@ function AutomaticScrollButton(props: Props) {
     setSkipAutomaticScroll,
     forceAutomaticScroll,
     setForceAutomaticScroll,
+    autoScrollButtonRef,
   } = props;
   const [panelScrollTop, setPanelScrollTop] = useState(
     panelRef.current?.scrollTop
@@ -149,7 +152,7 @@ function AutomaticScrollButton(props: Props) {
   if (!showButton) return null;
 
   return (
-    <IndicatorButton showOnTop={showButtonOnTop} onClick={scrollToCurrentWord}>
+    <IndicatorButton showOnTop={showButtonOnTop} onClick={scrollToCurrentWord} ref={autoScrollButtonRef}>
       Scroll to current word
     </IndicatorButton>
   );
