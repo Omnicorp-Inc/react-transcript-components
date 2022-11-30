@@ -46,7 +46,7 @@ type Props = {
   forceAutomaticScroll: boolean;
   setForceAutomaticScroll(force: boolean): void;
 
-  autoScrollButtonRef: { current: HTMLDivElement | null };
+  autoScrollButtonRef?: { current: HTMLDivElement | null };
 };
 
 function AutomaticScrollButton(props: Props) {

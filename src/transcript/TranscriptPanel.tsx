@@ -93,7 +93,7 @@ type Props = {
     end_word_offset: number
   ): void;
 
-  autoScrollButtonRef: { current: HTMLDivElement | null };
+  autoScrollButtonRef?: { current: HTMLDivElement | null };
 };
 
 function TranscriptPanel(props: Props) {
