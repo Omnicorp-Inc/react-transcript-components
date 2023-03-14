@@ -76,7 +76,7 @@ function HighlightHandle(props: Props) {
           left: left,
           zIndex: 4,
           userSelect: "none",
-          fill: color || "#00BDC9",
+          fill: color || "#368ffa",
         }}
         onClick={() => console.log("Pogger!")}
         onMouseDown={onMouseDown}

@@ -62,6 +62,12 @@ function TranscriptSelection(props: SelectionProps) {
   const beforeDragSelectionParams = useRef<SelectionParams | undefined>();
 
   useEffect(() => {
+    if (!selectionParams) return;
+
+    createHighlight(selectionParams.start.word.id, selectionParams.end.word.id);
+  }, [selectionParams]);
+
+  useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("mouseup", onMouseUp);
     window.addEventListener("mousedown", onMouseDown);

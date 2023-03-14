@@ -26,7 +26,7 @@ function SelectionMarker(props: {
             height: r.height + 9,
             width: r.width + 4,
             borderRadius: "4px",
-            backgroundColor: "#2EF5FF",
+            backgroundColor: "rgba(54, 143, 250, 0.35)",
           }}
         />
       ))}
