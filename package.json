@@ -1,6 +1,6 @@
 {
   "name": "@Omnicorp-Inc/react-transcript-components",
-  "version": "0.0.10",
+  "version": "0.1.1",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
