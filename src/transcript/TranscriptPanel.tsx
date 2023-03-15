@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 
 import {
@@ -19,11 +13,7 @@ import AutomaticScrollButton from "./AutomaticScrollButton";
 import CurrentWordIndicator from "./CurrentWordIndicator";
 import TranscriptText from "./ParagraphBlock";
 import TranscriptSelection from "./selections/TranscriptSelection";
-import {
-  calculateActiveWordAndOffset,
-  getTimestampForWord,
-  getWordBoundingRect,
-} from "./utils";
+import { calculateActiveWordAndOffset, getTimestampForWord, getWordBoundingRect } from "./utils";
 
 const TranscriptPanelDiv = styled.div`
   /* Fix for Firefox bug where padding-bottom is ignored with overflow: auto or overflow: scroll
@@ -87,13 +77,10 @@ type Props = {
 
   highlights: ExternalHighlight[];
   createHighlight(start_word_offset: number, end_word_offset: number): void;
-  updateHighlight(
-    id: string,
-    start_word_offset: number,
-    end_word_offset: number
-  ): void;
+  updateHighlight(id: string, start_word_offset: number, end_word_offset: number): void;
 
   autoScrollButtonRef?: { current: HTMLDivElement | null };
+  highlightEnabled?: boolean;
 };
 
 function TranscriptPanel(props: Props) {
@@ -107,21 +94,16 @@ function TranscriptPanel(props: Props) {
     highlights,
     createHighlight,
     updateHighlight,
-    readOnly
+    highlightEnabled,
+    readOnly,
   } = props;
   const panel = useRef<HTMLDivElement>(null);
 
-  const [skipAutomaticScroll, setSkipAutomaticScroll] =
-    useState<boolean>(false);
-  const [forceAutomaticScroll, setForceAutomaticScroll] =
-    useState<boolean>(false);
-  const [selectedHighlightId, setSelectedHighlightId] = useState<
-    string | undefined
-  >();
+  const [skipAutomaticScroll, setSkipAutomaticScroll] = useState<boolean>(false);
+  const [forceAutomaticScroll, setForceAutomaticScroll] = useState<boolean>(false);
+  const [selectedHighlightId, setSelectedHighlightId] = useState<string | undefined>();
 
-  const [sentenceIdToNode, setSentenceIdToNode] = useState<
-    Map<number, HTMLSpanElement>
-  >(new Map());
+  const [sentenceIdToNode, setSentenceIdToNode] = useState<Map<number, HTMLSpanElement>>(new Map());
 
   function getPanelOffset() {
     if (panel.current == null) return { x: 0, y: 0 };
@@ -132,28 +114,27 @@ function TranscriptPanel(props: Props) {
     };
   }
 
-  const speakerMap: Record<number, { speaker: Speaker; index: number }> =
-    useMemo(() => {
-      var counter = 0;
-      const speakers = {};
-      const seenSpeakerNames = new Set<string>();
-      transcript.forEach((p) => {
-        if (!seenSpeakerNames.has(p.speaker)) {
-          seenSpeakerNames.add(p.speaker);
-          speakers[counter] = {
-            speaker: {
-              id: counter,
-              dbId: counter,
-              name: p.speaker,
-              primary: false,
-            },
-            index: counter,
-          };
-          counter += 1;
-        }
-      });
-      return speakers;
-    }, [transcript]);
+  const speakerMap: Record<number, { speaker: Speaker; index: number }> = useMemo(() => {
+    var counter = 0;
+    const speakers = {};
+    const seenSpeakerNames = new Set<string>();
+    transcript.forEach((p) => {
+      if (!seenSpeakerNames.has(p.speaker)) {
+        seenSpeakerNames.add(p.speaker);
+        speakers[counter] = {
+          speaker: {
+            id: counter,
+            dbId: counter,
+            name: p.speaker,
+            primary: false,
+          },
+          index: counter,
+        };
+        counter += 1;
+      }
+    });
+    return speakers;
+  }, [transcript]);
 
   const internalTranscript: Paragraph[] = useMemo(() => {
     const output: Paragraph[] = [];
@@ -193,11 +174,7 @@ function TranscriptPanel(props: Props) {
       const sentenceWords: ExternalWord[][] = [[]];
       p.words.forEach((w) => {
         sentenceWords[sentenceWords.length - 1].push(w);
-        if (
-          w.text.includes(".") ||
-          w.text.includes("!") ||
-          w.text.includes("?")
-        ) {
+        if (w.text.includes(".") || w.text.includes("!") || w.text.includes("?")) {
           sentenceWords.push([]);
         }
       });
@@ -238,10 +215,7 @@ function TranscriptPanel(props: Props) {
   );
 
   const currentWordPosition = useMemo(() => {
-    const activeWordData = calculateActiveWordAndOffset(
-      internalTranscript,
-      timestamp
-    );
+    const activeWordData = calculateActiveWordAndOffset(internalTranscript, timestamp);
     if (!activeWordData) return undefined;
 
     const sentenceRef = sentenceIdToNode.get(activeWordData.word.sentence_id);
@@ -276,10 +250,7 @@ function TranscriptPanel(props: Props) {
 
   const scrollToTimestamp = useCallback(
     (toTimestamp: any) => {
-      const activeWordData = calculateActiveWordAndOffset(
-        internalTranscript,
-        toTimestamp
-      );
+      const activeWordData = calculateActiveWordAndOffset(internalTranscript, toTimestamp);
       if (!activeWordData) return;
 
       const sentenceRef = sentenceIdToNode.get(activeWordData.word.sentence_id);
@@ -322,11 +293,7 @@ function TranscriptPanel(props: Props) {
     }
 
     if (word) {
-      const foundTimestamp = getTimestampForWord(
-        internalTranscript,
-        word,
-        toTimestamp
-      );
+      const foundTimestamp = getTimestampForWord(internalTranscript, word, toTimestamp);
       if (foundTimestamp !== 0) {
         setTimestamp(foundTimestamp);
         scrollToTimestamp(foundTimestamp);
@@ -365,23 +332,22 @@ function TranscriptPanel(props: Props) {
           setSelectedHighlightId(undefined);
         }}
       >
-        <TranscriptSelection
-          panelRef={panel}
-          readOnly={readOnly}
-          transcript={internalTranscript}
-          getPanelOffset={getPanelOffset}
-          highlightBounds={internalHighlights}
-          sentenceIdToRef={sentenceIdToNode}
-          selectedHighlightId={selectedHighlightId}
-          setSelectedHighlightId={setSelectedHighlightId}
-          createHighlight={createHighlight}
-          editHighlightBounds={updateHighlight}
-        />
-        {currentWordPosition && (
-          <CurrentWordIndicator
-            currentWordPosition={currentWordPosition}
+        {highlightEnabled && (
+          <TranscriptSelection
             panelRef={panel}
+            readOnly={readOnly}
+            transcript={internalTranscript}
+            getPanelOffset={getPanelOffset}
+            highlightBounds={internalHighlights}
+            sentenceIdToRef={sentenceIdToNode}
+            selectedHighlightId={selectedHighlightId}
+            setSelectedHighlightId={setSelectedHighlightId}
+            createHighlight={createHighlight}
+            editHighlightBounds={updateHighlight}
           />
+        )}
+        {currentWordPosition && (
+          <CurrentWordIndicator currentWordPosition={currentWordPosition} panelRef={panel} />
         )}
         <TranscriptTextDiv>
           <TranscriptText
